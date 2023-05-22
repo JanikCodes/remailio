@@ -60,7 +60,7 @@ class AcceptButton(discord.ui.Button):
 
         self.db.add_new_reminder(self.final_date, self.final_time, self.e_mails, self.header, self.content)
         print("Success!")
-        await interaction.message.edit(embed=edited_embed, view=None)
+        await interaction.message.edit(embed=edited_embed, view=None, delete_after=3)
 
 class DeclineButton(discord.ui.Button):
     def __init__(self):
@@ -73,7 +73,7 @@ class DeclineButton(discord.ui.Button):
         edited_embed = message.embeds[0]
         edited_embed.colour = discord.Color.red()
 
-        await interaction.message.edit(embed=edited_embed, view=None)
+        await interaction.message.edit(embed=edited_embed, view=None, delete_after=3)
 
 class RemindMeReviewView(discord.ui.View):
     def __init__(self, db, final_date, final_time, e_mails, header, content):
