@@ -107,7 +107,5 @@ class RemindContentModal(discord.ui.Modal):
         embed.add_field(name="Content", value=self.reminder.get_content(), inline=False)
         embed.set_footer(text=f"E-Mails: {self.reminder.get_emails_for_display()}")
 
-
-
         await interaction.followup.send(embed=embed, view=RemindMeReviewView(db=self.db, reminder=self.reminder))
 

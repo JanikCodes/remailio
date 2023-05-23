@@ -46,10 +46,10 @@ class Reminder:
         return self.__time.strftime('%H:%M:%S')
 
     def get_date_formatted(self):
-        return self.__time.strftime('%d.%m.%Y')
+        return self.__date.strftime('%d.%m.%Y')
 
     def get_date_formatted_sql(self):
-        return self.__time.strftime('%Y-%m-%d')
+        return self.__date.strftime('%Y-%m-%d')
 
     def get_emails_for_display(self):
         email_str = str()
