@@ -1,6 +1,8 @@
 import mysql.connector
 
 import config
+from Classes.reminder import Reminder
+
 
 class Database():
     
@@ -21,17 +23,12 @@ class Database():
         else:
             print("Database connection failed")
 
-    def add_new_reminder(self, final_date, final_time, e_mails, header,content):
-        new_emails = e_mails.replace(",", "#")
-        formatted_time = final_time.strftime("%H:%M:%S")
-        formatted_date = final_date.strftime("%Y-%m-%d")
-
-        sql = f'INSERT INTO reminder VALUE(NULL, "{header}", "{content}", "{new_emails}", %s, %s);'
+    def add_new_reminder(self, reminder):
+        sql = f'INSERT INTO reminder VALUE(NULL, "{reminder.get_header()}", "{reminder.get_content()}", "{reminder.get_emails_formatted_sql()}", %s, %s);'
         formatted_sql = sql.strip().replace('"', '\"')
-        values = (formatted_date, formatted_time)
+        values = (reminder.get_date_formatted_sql(), reminder.get_time_formatted_sql())
         self.cursor.execute(formatted_sql, values)
         self.mydb.commit()
-
 
     def get_all_expired_reminders(self):
         reminders = []
@@ -43,7 +40,12 @@ class Database():
         res = self.cursor.fetchall()
         if res:
             for row in res:
-                reminders.append([row[0], row[1], row[2], row[3]])
+                reminder = Reminder()
+                reminder.set_id(row[0])
+                reminder.set_header(row[1])
+                reminder.set_content(row[2])
+                reminder.set_emails(row[3])
+                reminders.append(reminder)
 
         return reminders
 

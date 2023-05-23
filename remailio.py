@@ -45,14 +45,14 @@ class Client(commands.Bot):
         reminders = self.database.get_all_expired_reminders()
 
         # idReminder, header, content, emails
-        for remind in reminders:
+        for reminder in reminders:
             print("Send Reminder out!")
             # loop over emails
-            emails = remind[3].split('#')
+            emails = reminder.get_emails_formatted_sql().split('#')
             for email in emails:
-                await self.send_email(config.botConfig["email_username"], config.botConfig["email_password"], email, remind[1], remind[2])
+                await self.send_email(config.botConfig["email_username"], config.botConfig["email_password"], email, reminder.get_header(), reminder.get_content())
 
-            self.database.remove_reminder(idReminder=remind[0])
+            self.database.remove_reminder(idReminder=reminder.get_id())
 
     async def send_email(self, sender_email, sender_password, receiver_email, subject, message):
         smtp_server = 'mail.gmx.com'
