@@ -1,14 +1,12 @@
 ## E-Mail Reminder Bot in Discord Python<br>
-The bot has the ability to send E-Mails to multiple E-Mails at a certain time & date.
+Remailion is a Discord Bot that can send multiple reminder E-Mails at a certain time & date to multiple E-Mails.
+It's very useful if you want to remind yourself for something, or others.
 
 ### Built With
 [![Python][python]][python-url]
 [![MySQL][mysql]][mysql-url]
 [![Tmux][tmux]][tmux-url]
 
-## Features
-- [x] Set a reminder
-- [X] Automatically sends emails to target emails at date & time
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [python]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
